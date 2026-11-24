@@ -64,7 +64,7 @@ Every LLM call this week goes through `server/llm.py`, not a vendor SDK directly
 
 If the provider answers with an error, `send_message` and `stream_message` raise `LLMAPIError("LLM API error <status>: <body>")`. If it can't be reached at all, they raise `ConnectionError`. Neither has a time limit of its own.
 
-Chat calls use a generic OpenAI-compatible REST shape, which a wide range of providers and gateways support. Point `.env`'s `LLM_API_BASE`, `LLM_API_KEY` and `LLM_MODEL` at whichever provider you're using; nothing else in this repo needs to change.
+Chat calls use a generic OpenAI-compatible REST shape, which a wide range of providers and gateways support. Point `.env`'s `LLM_API_BASE`, `LLM_API_KEY` and `LLM_MODEL` at whichever provider you're using; nothing else in this repo needs to change. `LLM_REASONING_EFFORT` is optional: some models spend tokens on hidden "thinking" before they answer, and `none` switches that off on providers that support it (this course's NVIDIA model does).
 
 Embeddings run **locally by default** (`EMBED_PROVIDER=local`), using a small open model through `fastembed`. That needs no key and costs nothing. The model (~90MB) downloads the first time `embed()` runs and is cached in `~/.cache/fastembed`, so run it once before Day 3's session. Set `EMBED_PROVIDER=api` and `LLM_EMBED_MODEL` to use a provider's embeddings endpoint instead.
 

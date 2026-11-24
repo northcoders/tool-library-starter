@@ -37,6 +37,10 @@ def _config() -> dict[str, str | None]:
         "api_key": os.getenv("LLM_API_KEY"),
         "model": os.getenv("LLM_MODEL"),
         "embed_model": os.getenv("LLM_EMBED_MODEL"),
+        # Optional. Some models spend tokens on hidden "thinking" before they
+        # answer; setting this (e.g. "none") switches that off on providers
+        # that support it. Left unset, nothing extra is sent.
+        "reasoning_effort": os.getenv("LLM_REASONING_EFFORT"),
     }
 
 
@@ -68,6 +72,8 @@ async def send_message(
         "max_tokens": max_tokens,
         "messages": _with_system(system, messages),
     }
+    if config["reasoning_effort"]:
+        body["reasoning_effort"] = config["reasoning_effort"]
     if tools is not None:
         body["tools"] = tools
 
@@ -135,6 +141,8 @@ async def stream_message(
         "stream": True,
         "messages": _with_system(system, messages),
     }
+    if config["reasoning_effort"]:
+        body["reasoning_effort"] = config["reasoning_effort"]
 
     try:
         async with httpx.AsyncClient(timeout=None) as client:
