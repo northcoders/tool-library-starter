@@ -19,7 +19,6 @@ tool-library-starter/
     src/api/client.ts  shared fetch helpers (apiGet, apiPost, ApiError)
     src/types.ts       types for the API's request and response bodies
   eval-questions.md    the week's running evaluation question set
-  .env.example
 ```
 
 ## Setup
@@ -31,7 +30,20 @@ cd server
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp ../.env.example .env          # fill in your LLM provider's details
+```
+
+Then create `server/.env` with your LLM provider's details, putting your own API key in place of `your-api-key-here`. `.env` is gitignored, so your key is never committed.
+
+```
+LLM_API_BASE=https://integrate.api.nvidia.com/v1
+LLM_API_KEY=your-api-key-here
+LLM_MODEL=nvidia/nemotron-3-ultra-550b-a55b
+LLM_REASONING_EFFORT=none
+```
+
+Then start the server from `server/`:
+
+```
 uvicorn main:app --reload        # http://localhost:8000
 ```
 
