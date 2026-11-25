@@ -13,13 +13,13 @@ tool-library-starter/
     scratch/           small scripts you run by hand (hello_llm.py)
     tests/             pytest tests for the existing routes
     requirements.txt
+    .env.example       copy to .env, then add your API key
   client/              minimal Vite + React + TypeScript app (proxies
                        /api to the server); the chat UI is built here
                        on Day 4
     src/api/client.ts  shared fetch helpers (apiGet, apiPost, ApiError)
     src/types.ts       types for the API's request and response bodies
   eval-questions.md    the week's running evaluation question set
-  .env.example
 ```
 
 ## Setup
@@ -31,7 +31,7 @@ cd server
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp ../.env.example .env          # fill in your LLM provider's details
+cp .env.example .env             # then replace the placeholder with your API key
 uvicorn main:app --reload        # http://localhost:8000
 ```
 
