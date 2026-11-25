@@ -29,7 +29,7 @@ Server (Python 3.12 or newer):
 ```
 cd server
 python3 -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
 cp ../.env.example .env          # fill in your LLM provider's details
 uvicorn main:app --reload        # http://localhost:8000
