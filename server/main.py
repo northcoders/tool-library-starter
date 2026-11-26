@@ -105,5 +105,5 @@ def get_overdue_loans() -> LoansResponse:
     return {"loans": overdue}
 
 
-# The week's running feature - POST /api/ask - is added here on Day 2,
-# then extended in place through Day 5. It does not exist yet.
+# The week's running feature - POST /api/ask - should be added here
+# then extended in place as we work through the tasks upto Day 5
